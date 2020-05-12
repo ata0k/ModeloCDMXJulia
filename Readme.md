@@ -28,8 +28,8 @@ Como ejemplo pueden copiar y usar las siguientes lineas:
 **Condiciones_iniciales = [1-2/22000000, 1/22000000, 1/22000000, 0,0,0,0,0,0]** \
 **T, Y = ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)** \
 **plot(xlabel = "dias", ylabel = "poblacion")** \
-**plot!(T, Y[:, 1]* Poblacion_suceptible, label = "Susceptibles")** \
-**plot!(T, Y[:, 3]* Poblacion_suceptible, label = "Infectados")** \
-**plot!(T, Y[:, 6]* Poblacion_suceptible, label = "Hospitalizados")** \
-**plot!(T, Y[:, 8]* Poblacion_suceptible, label = "Recuperados")** \
-**plot!(T, Y[:, 9]* Poblacion_suceptible, label = "Muertes")** \
+**plot!(T, Y[:, 1]** * **Poblacion_suceptible, label = "Susceptibles")** \
+**plot!(T, Y[:, 3]** * **Poblacion_suceptible, label = "Infectados")** \
+**plot!(T, Y[:, 6]** * **Poblacion_suceptible, label = "Hospitalizados")** \
+**plot!(T, Y[:, 8]** * **Poblacion_suceptible, label = "Recuperados")** \
+**plot!(T, Y[:, 9]** * **Poblacion_suceptible, label = "Muertes")** \
