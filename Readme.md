@@ -32,4 +32,4 @@ Como ejemplo pueden copiar y usar las siguientes lineas:
 **plot!(T, Y[:, 3]** * **Poblacion_suceptible, label = "Infectados")** \
 **plot!(T, Y[:, 6]** * **Poblacion_suceptible, label = "Hospitalizados")** \
 **plot!(T, Y[:, 8]** * **Poblacion_suceptible, label = "Recuperados")** \
-**plot!(T, Y[:, 9]** * **Poblacion_suceptible, label = "Muertes")** \
+**plot!(T, Y[:, 9]** * **Poblacion_suceptible, label = "Muertes")** 
