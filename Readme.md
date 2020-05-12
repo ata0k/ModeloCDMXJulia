@@ -8,8 +8,7 @@ Para usarlo hay que bajar el archivo "ModeloCovid-19CDMX.jl", después en una te
 
 Como ejemplo pueden copiar y usar las siguientes lineas: 
 
-using Plots # No es necesario tener esta paquetería, pueden usar la paquetería de gráficos de su preferencia. 
-
+using Plots # No es necesario tener esta paquetería, pueden usar la paquetería de gráficos de su preferencia. \
 Ro = 2.83
 
 Dinfect = 2.9
