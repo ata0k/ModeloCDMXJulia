@@ -24,7 +24,7 @@ Como ejemplo pueden copiar y usar las siguientes lineas:
 **ti = 1** \
 **tf = 100** \
 **N = 100** \
-**Poblacion_suceptible = 22e** \
+**Poblacion_suceptible = 22e6** \
 **Condiciones_iniciales = [1-2/22000000, 1/22000000, 1/22000000, 0,0,0,0,0,0]** \
 **T, Y = ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)** \
 **plot(xlabel = "dias", ylabel = "poblacion")** \
