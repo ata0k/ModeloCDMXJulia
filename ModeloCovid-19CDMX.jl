@@ -4,7 +4,6 @@ el punto t=b, con condicion inicial x(a)=α. Se obtienen N puntos de la solucion
 function RK4v(a,b,N,α,f::Function...)
     F = collect(f)
     n = length(α)
-    println(n)
     m = length(F)
     if m !=n
         return "el numero de variables α debe ser igual al numero de funciones f"
@@ -46,7 +45,7 @@ end
 vector de tiempo (con los tiempos desde ti, hasta tf), con N entradas y una matriz Y, donde cada columna es un vector con  
 las soluciones de S (suceptibles), E (expuestos), I (infectados), L (leves), G (graves), H (hospitalizados), ICU (cuidados
 intensivos), R (recuperados) y M (muertos)"
-function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)
+function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Float64, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)
     f1(x, t) = -Ro/Dinfect * x[1]*x[3]
     f2(x, t) = Ro/Dinfect * x[1]*x[3]- 1/Dincub *x[2]
     f3(x, t) = 1/Dincub *x[2] - 1/Dinfect*x[3]
@@ -56,6 +55,27 @@ function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro, Dinfect, Dincub, pgra
     f7(x, t) = picu/DICU*x[6]-((1-pm)/DRICU+pm/DM)*x[7]
     f8(x, t) = 1/DRL*x[4]+(1-picu)/DRH*x[6]+(1-pm)/DRICU * x[7]
     f9(x, t) = pm/DM * x[7]
-    T, Y = RK4v(0,350,100,[1.0-2/22000000, 1/22000000,1/22000000,0,0,0,0,0,0],f1, f2, f3, f4, f5, f6, f7, f8, f9)
+    T, Y = RK4v(ti,tf,N,Condiciones_iniciales,f1, f2, f3, f4, f5, f6, f7, f8, f9)
     return T, Y
+end
+
+" ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Array, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm), regresa un 
+vector de tiempo (con los tiempos desde ti, hasta tf), con N entradas y una matriz Y, donde cada columna es un vector con  
+las soluciones de S (suceptibles), E (expuestos), I (infectados), L (leves), G (graves), H (hospitalizados), ICU (cuidados
+intensivos), R (recuperados) y M (muertos)."
+function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Array, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)
+    YY = zeros(N+1, 9)
+    YY[1,:] = copy(Condiciones_iniciales)
+    TT = zeros(N+1)
+    δt = (tf-ti)/N
+    Y = copy(Condiciones_iniciales)
+    for i in 1:length(Ro)
+        TT[i+1] = ti+i*δt
+        ti1 = ti+(i-1)*δt
+        tf1 = ti+i*δt
+        T, Y1 = ModelosCDMX(ti1, tf1, 1, Y, Ro[i], Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)
+        Y = copy(Y1[2,:])
+        YY[i+1,:] = copy(Y1[2,:])
+    end
+    return TT, YY
 end
