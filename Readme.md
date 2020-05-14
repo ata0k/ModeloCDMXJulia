@@ -42,5 +42,5 @@ Como ejemplo pueden copiar y usar las siguientes lineas que corresponden a los p
 **plot!(T, Y[:, 8]** * **Poblacion_suceptible, label = "Recuperados")** \
 **plot!(T, Y[:, 9]** * **Poblacion_suceptible, label = "Muertes",ylim = (1,1e6), key = :topleft)** 
 
-![alt text](https://github.com/ata0k/ModeloCDMXJulia/blob/master/test.png " Imagen prueba")
+![alt text](https://github.com/ata0k/ModeloCDMXJulia/blob/master/test2.png " Imagen prueba")
 
