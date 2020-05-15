@@ -1,6 +1,6 @@
-"RK4v(a,b,N,α,f) obtiene, mediante el metodo Runge-Kuta de orden 4 la solucion numerica 
+"""RK4v(a,b,N,α,f) obtiene, mediante el metodo Runge-Kuta de orden 4 la solucion numerica 
 de la ecuacion diferencial dx/dt = f(x,t) desde el punto t=a, hasta 
-el punto t=b, con condicion inicial x(a)=α. Se obtienen N puntos de la solucion"
+el punto t=b, con condicion inicial x(a)=α. Se obtienen N puntos de la solucion"""
 function RK4v(a,b,N,α,f::Function...)
     F = collect(f)
     n = length(α)
@@ -41,10 +41,10 @@ function RK4v(a,b,N,α,f::Function...)
     return T,reshape(X,n,N+1)' 
 end    
 
-" ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm), regresa un 
+""" ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm), regresa un 
 vector de tiempo (con los tiempos desde ti, hasta tf), con N entradas y una matriz Y, donde cada columna es un vector con  
 las soluciones de S (suceptibles), E (expuestos), I (infectados), L (leves), G (graves), H (hospitalizados), ICU (cuidados
-intensivos), R (recuperados) y M (muertos)"
+intensivos), R (recuperados) y M (muertos)"""
 function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Float64, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)
     f1(x, t) = -Ro/Dinfect * x[1]*x[3]
     f2(x, t) = Ro/Dinfect * x[1]*x[3]- 1/Dincub *x[2]
@@ -59,10 +59,10 @@ function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Float64, Dinfect, Din
     return T, Y
 end
 
-" ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Array, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm), regresa un 
+""" ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Array, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm), regresa un 
 vector de tiempo (con los tiempos desde ti, hasta tf), con N entradas y una matriz Y, donde cada columna es un vector con  
 las soluciones de S (suceptibles), E (expuestos), I (infectados), L (leves), G (graves), H (hospitalizados), ICU (cuidados
-intensivos), R (recuperados) y M (muertos)."
+intensivos), R (recuperados) y M (muertos)."""
 function ModelosCDMX(ti, tf, N, Condiciones_iniciales, Ro::Array, Dinfect, Dincub, pgrave, DRL,DRH, Dhosp, picu, DRICU, DM, pm)
     YY = zeros(N+1, 9)
     YY[1,:] = copy(Condiciones_iniciales)
